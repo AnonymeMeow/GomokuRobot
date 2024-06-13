@@ -54,7 +54,10 @@ namespace opencv
         cv::namedWindow(window_title, cv::WINDOW_NORMAL);
         while (is_active)
         {
-            cv::imshow(window_title, img);
+            if (!img.size().empty())
+            {
+                cv::imshow(window_title, img);
+            }
             cv::waitKey(10);
         }
         cv::destroyAllWindows();
