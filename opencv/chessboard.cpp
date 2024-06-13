@@ -8,8 +8,6 @@ namespace opencv
     const int A4_BOARD_PADDING = 50;
     const int A4_BOARD_SPACING = (A4_BOARD_WIDTH - 2 * A4_BOARD_PADDING) / 10;
 
-    cv::Mat img;
-
     void draw_circle(
         int x, int y,
         const cv::Scalar& color = BLACK,
@@ -33,8 +31,8 @@ namespace opencv
     {
         if (event == cv::EVENT_LBUTTONDOWN && can_click)
         {
-            int ix = (x + 50) / 200;
-            int iy = (y - 350) / 200;
+            int ix = (x + A4_BOARD_SPACING / 2 - A4_BOARD_PADDING) / A4_BOARD_SPACING;
+            int iy = (y - 3 * A4_BOARD_SPACING / 2 - A4_BOARD_PADDING) / A4_BOARD_SPACING;
             if (ix >= 0 && ix < 11 && iy >= 0 && iy < 11)
             {
                 click_point.col = ix;
@@ -51,7 +49,7 @@ namespace opencv
         for (int i = 0; i < 11; i++)
         {
             cv::line(
-                img, 
+                img,
                 cv::Point(A4_BOARD_SPACING * i + A4_BOARD_PADDING, 2 * A4_BOARD_SPACING + A4_BOARD_PADDING),
                 cv::Point(A4_BOARD_SPACING * i + A4_BOARD_PADDING, 12 * A4_BOARD_SPACING + A4_BOARD_PADDING),
                 BLACK, 5
@@ -76,6 +74,7 @@ namespace opencv
 
     void test(gomokuai::PIECE_TYPE ai_type)
     {
+        cv::namedWindow(window_title, cv::WINDOW_NORMAL);
         gomokuai::init();
         draw_A4_board();
         cv::setMouseCallback(window_title, onClick);

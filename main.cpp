@@ -48,8 +48,13 @@ void func()
     }
 }
 
-int main()
+int main(int argc, char *argv[])
 {
+    if (argc > 1 && strcmp(argv[1], "aitest") == 0)
+    {
+        opencv::test();
+        return 0;
+    }
     if (!hid::init())
     {
         logger.error("Error occured, exiting.");
