@@ -49,7 +49,7 @@ namespace opencv
         return (a - b).dot(a - b);
     }
 
-    gomokuai::Cood_2D get_ai_step(int desired_count)
+    gomokuai::Coord_2D get_ai_step(int desired_count)
     {
         while (true)
         {

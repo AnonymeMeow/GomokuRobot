@@ -27,7 +27,7 @@ namespace opencv
     }
 
     bool can_click = false;
-    gomokuai::Cood_2D click_point;
+    gomokuai::Coord_2D click_point;
 
     void onClick(int event, int x, int y, int flags, void* userdata)
     {

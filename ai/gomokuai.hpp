@@ -24,29 +24,29 @@ namespace gomokuai
         ERROR = -1,
     };
 
-    struct Cood_2D
+    struct Coord_2D
     {
         int row;
         int col;
 
-        Cood_2D():
+        Coord_2D():
             row(-1),
             col(-1)
         {}
 
-        Cood_2D(int x, int y):
+        Coord_2D(int x, int y):
             row(x),
             col(y)
         {}
 
-        Cood_2D operator+ (const Cood_2D& other) const
+        Coord_2D operator+ (const Coord_2D& other) const
         {
-            return Cood_2D(row + other.row, col + other.col);
+            return Coord_2D(row + other.row, col + other.col);
         }
 
-        Cood_2D operator* (int num) const
+        Coord_2D operator* (int num) const
         {
-            return Cood_2D(row * num, col * num);
+            return Coord_2D(row * num, col * num);
         }
     };
     
@@ -58,11 +58,11 @@ namespace gomokuai
     void clear();
 
     // 获取棋盘上相应位置棋子类型
-    PIECE_TYPE get_point(Cood_2D point);
+    PIECE_TYPE get_point(Coord_2D point);
 
     // 放置棋子
-    void put_chess(Cood_2D point, PIECE_TYPE type);
+    void put_chess(Coord_2D point, PIECE_TYPE type);
 
     // 获取AI的下一步下棋点位
-    Cood_2D get_next_point(PIECE_TYPE ai_piece_type);
+    Coord_2D get_next_point(PIECE_TYPE ai_piece_type);
 }

@@ -20,5 +20,5 @@ namespace opencv
 
     void exit();
 
-    gomokuai::Cood_2D get_ai_step(int);
+    gomokuai::Coord_2D get_ai_step(int);
 }

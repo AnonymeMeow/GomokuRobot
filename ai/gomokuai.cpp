@@ -80,7 +80,7 @@ namespace gomokuai
         memset(chessData, EMPTY, board_size * board_size * sizeof(PIECE_TYPE));
     }
 
-    PIECE_TYPE get_point(Cood_2D point)
+    PIECE_TYPE get_point(Coord_2D point)
     {
         if (
             point.row < 0 ||
@@ -94,7 +94,7 @@ namespace gomokuai
         return chessData[point.row * board_size + point.col];
     }
 
-    void put_chess(Cood_2D point, PIECE_TYPE type)
+    void put_chess(Coord_2D point, PIECE_TYPE type)
     {
         if (
             point.row < 0 ||
@@ -108,9 +108,9 @@ namespace gomokuai
         chessData[point.row * board_size + point.col] = type;
     }
 
-    vector<string> get_situation(Cood_2D point)
+    vector<string> get_situation(Coord_2D point)
     {
-        const static vector<Cood_2D> directions{
+        const static vector<Coord_2D> directions{
             {1, 0},
             {1, 1},
             {0, 1},
@@ -173,7 +173,7 @@ namespace gomokuai
         return false;
     }
 
-    int evaluate(Cood_2D point)
+    int evaluate(Coord_2D point)
     {
         // 分值
         int score = 0;
@@ -222,16 +222,16 @@ namespace gomokuai
         return score;
     }
 
-    Cood_2D get_best_point()
+    Coord_2D get_best_point()
     {
-        Cood_2D best;
+        Coord_2D best;
         int score = -INFINITY;
 
         for (int i = 0; i < board_size; i++)
         {
             for (int j = 0; j < board_size; j++)
             {
-                Cood_2D point(i, j);
+                Coord_2D point(i, j);
                 if (get_point(point) != EMPTY)
                 {
                     continue;
@@ -254,7 +254,7 @@ namespace gomokuai
         return best;
     }
 
-    Cood_2D get_next_point(PIECE_TYPE ai_piece_type)
+    Coord_2D get_next_point(PIECE_TYPE ai_piece_type)
     {
         int piece_count = 0;
         int grid_count = board_size * board_size;
@@ -270,7 +270,7 @@ namespace gomokuai
 
         if (piece_count == 0)
         {
-            return Cood_2D(board_size / 2, board_size / 2);
+            return Coord_2D(board_size / 2, board_size / 2);
         }
         return get_best_point();
     }

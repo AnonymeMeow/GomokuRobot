@@ -51,4 +51,6 @@ namespace hid
     void wait_for_action_done();
 
     void wait_for_next_key();
+
+    void interrupt_key_wait();
 }

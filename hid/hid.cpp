@@ -142,6 +142,11 @@ namespace hid
         key_cond.wait(lock);
     }
 
+    void interrupt_key_wait()
+    {
+        key_cond.notify_all();
+    }
+
     bool init()
     {
         logger.info("Trying to open device {}...", config::hid_device_name.c_str());
