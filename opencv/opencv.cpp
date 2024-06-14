@@ -14,10 +14,13 @@ namespace opencv
     bool is_active = false;
 
     cv::Mat img;
+    std::mutex img_lock;
 
     void show_img(cv::Mat im, bool do_wait_key = true)
     {
+        img_lock.lock();
         img = im;
+        img_lock.unlock();
         if (do_wait_key)
         {
             cv::waitKey();
@@ -54,10 +57,12 @@ namespace opencv
         cv::namedWindow(window_title, cv::WINDOW_NORMAL);
         while (is_active)
         {
+            img_lock.lock();
             if (!img.size().empty())
             {
                 cv::imshow(window_title, img);
             }
+            img_lock.unlock();
             cv::waitKey(10);
         }
         cv::destroyAllWindows();
@@ -83,7 +88,8 @@ namespace opencv
         {
             cv::Mat img, grey, blue;
             cap.read(img);
-            // show_img(img);
+            // show_img(img, false);
+            // continue;
 
             // 定位点
             cv::inRange(img, cv::Scalar(159, 95, 0), cv::Scalar(255, 223, 127), blue);

@@ -108,7 +108,7 @@ namespace hid
             {
                 logger.error("Error occured when reading from the hid device: {}", hid_error(device));
                 exit();
-                continue;
+                return;
             }
             Report* report = (Report*)buf;
             logger.trace("{} bytes received: {}", bytes, (string)*report);
